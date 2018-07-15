@@ -1,0 +1,11 @@
+#!/bin/bash
+#  vi bandwidthTest.cuf
+#     # add call for setaffinity_for_nvidia
+set -x
+pgcc -c setaffinity_for_nvidia.c
+pgfortran bandwidthTest.cuf setaffinity_for_nvidia.o
+export MYCUDADEVICE=1
+nice ./a.out
+export MYCUDADEVICE=4
+nice ./a.out
+
